@@ -6,11 +6,12 @@ import Users from "../components/ManageUsers/Users";
 import PrivateRoutes from "./PrivateRoutes";
 import Role from "../components/Role/Role";
 import GroupRole from "../components/GroupRole/GroupRole";
+import Home from "../components/Home/Home";
 const AppRoutes = (props) => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<div>Home</div>} />
+        <Route path="/" element={<Home></Home>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
@@ -31,6 +32,6 @@ const AppRoutes = (props) => {
       </Routes>
     </div>
   );
-}
+};
 
 export default AppRoutes;

@@ -8,7 +8,6 @@ import connection from "./config/connectDB";
 import { configCors } from "./config/cors";
 import cookieParser from "cookie-parser";
 
-
 const app = express();
 const PORT = process.env.PORT || 8888;
 
@@ -25,16 +24,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // connection();
 
 // config cookie-parser
-app.use(cookieParser())
-
+app.use(cookieParser());
 
 // init web routes;
 initApiRoutes(app);
-initWebRoutes(app);
+// initWebRoutes(app);
 
 app.use((req, res) => {
-  return res.send('404 not found')
-})
+  return res.send("404 not found");
+});
 
 app.listen(PORT, () => {
   console.log("jwt backend is running on the port =  " + PORT);

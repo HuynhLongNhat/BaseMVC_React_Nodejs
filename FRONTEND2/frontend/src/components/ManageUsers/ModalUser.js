@@ -2,7 +2,11 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { fetchGroup, createNewUser ,updateCurrentUser} from "../../service/UserService";
+import {
+  fetchGroup,
+  createNewUser,
+  updateCurrentUser,
+} from "../../service/UserService";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
@@ -66,7 +70,7 @@ function ModalUser(props) {
         setUserData({ ...userData, group: groups[0].id });
       }
     } else {
-      toast.error(res.EM);
+      toast.error(res?.EM);
     }
   };
 
@@ -77,8 +81,8 @@ function ModalUser(props) {
     setUserData(_userData);
   };
   const checkValidate = () => {
-    if(action === 'UPDATE') {
-       return true
+    if (action === "UPDATE") {
+      return true;
     }
     // create user
     setValidInputs(validInputDefault);
@@ -108,25 +112,27 @@ function ModalUser(props) {
   const handleConfirmUser = async () => {
     let check = checkValidate();
     if (check === true) {
-    
-      let res = action === "CREATE" ? await createNewUser({
-        ...userData,
-        groupId: userData["group"],
-      }) : await updateCurrentUser({
-        ...userData,
-        groupId: userData["group"],
-      }) ;
+      let res =
+        action === "CREATE"
+          ? await createNewUser({
+              ...userData,
+              groupId: userData["group"],
+            })
+          : await updateCurrentUser({
+              ...userData,
+              groupId: userData["group"],
+            });
       if (res && res.EC === 0) {
         setUserData({
           ...defaultUserData,
-          group:  userGroup &&  userGroup.length > 0 ? userGroup[0].id : ''
+          group: userGroup && userGroup.length > 0 ? userGroup[0].id : "",
         });
-        toast.success(res.EM);
+        toast.success(res?.EM);
         props.toggleShowModalUser();
         props.fetchUser();
       }
       if (res && res.EC !== 0) {
-        toast.error(res.EM);
+        toast.error(res?.EM);
         let _validInputs = _.cloneDeep(validInputDefault);
         _validInputs[res.DT] = false;
         setValidInputs(_validInputs);

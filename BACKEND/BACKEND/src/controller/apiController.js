@@ -9,14 +9,14 @@ const handleRegister = async (req, res) => {
       !req.body.password
     ) {
       return res.status(200).json({
-        EM: "Missing required parameters",
+        EM: "Thiếu tham số bắt buộc",
         EC: "1",
         DT: "",
       });
     }
     if (req.body.password && req.body.password.length < 6) {
       return res.status(200).json({
-        EM: "Your password must have more than 6 character",
+        EM: "Mật khẩu của bạn phải có nhiều hơn 6 ký tự",
         EC: "1",
         DT: "",
       });
@@ -30,7 +30,7 @@ const handleRegister = async (req, res) => {
     });
   } catch (e) {
     return res.status(404).json({
-      EM: "Error from server",
+      EM: "Lỗi hệ thống",
       EC: "-1",
       DT: "",
     });
@@ -41,18 +41,20 @@ const handleLogin = async (req, res) => {
   try {
     if (!req.body.valueLogin || !req.body.password) {
       return res.status(200).json({
-        EM: "Missing required parameters",
+        EM: "Thiếu tham số bắt buộc",
         EC: "1",
         DT: "",
       });
     }
     let data = await apiService.handleUserLogin(req.body);
 
-    // set  
+    // set
     if (data && data.DT && data.DT.access_token) {
-
       // thuộc tính httpsOnly : true chỉ cho phía server lấy cookie
-      res.cookie('jwt', data.DT.access_token, { httpsOnly: true, maxAge: 60 * 60 * 1000 });
+      res.cookie("jwt", data.DT.access_token, {
+        httpsOnly: true,
+        maxAge: 60 * 60 * 1000,
+      });
     }
     return res.status(200).json({
       EM: data.EM,
@@ -62,7 +64,7 @@ const handleLogin = async (req, res) => {
   } catch (error) {
     console.log("check error ", error);
     return res.status(500).json({
-      EM: "Error from server",
+      EM: "Lỗi hệ thống",
       EC: "-1",
       DT: "",
     });
@@ -71,23 +73,23 @@ const handleLogin = async (req, res) => {
 
 const handleLogout = async (req, res) => {
   try {
-    res.clearCookie("jwt")
+    res.clearCookie("jwt");
     return res.status(200).json({
-      EM: "Clear cookie done!",
+      EM: "Xóa cookie xong!",
       EC: 0,
-      DT: '',
+      DT: "",
     });
   } catch (error) {
     console.log("check error ", error);
     return res.status(500).json({
-      EM: "Error from server",
+      EM: "Lỗi hệ thống",
       EC: "-1",
       DT: "",
     });
   }
-}
+};
 module.exports = {
   handleRegister,
   handleLogin,
-  handleLogout
+  handleLogout,
 };

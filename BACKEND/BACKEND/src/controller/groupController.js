@@ -12,7 +12,7 @@ const readFunc = async (req, res) => {
   } catch (error) {
     console.log("check error");
     return res.status(404).json({
-      EM: "Error from server",
+      EM: "Lỗi hệ thống",
       EC: "-1",
       DT: "",
     });

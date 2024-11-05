@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import "./Users.scss"
+import "./Users.scss";
 import React, { useCallback, useEffect, useState } from "react";
 import { FetchAllUsers } from "../../service/UserService";
 import ReactPaginate from "react-paginate";
@@ -22,17 +22,11 @@ function Users(props) {
   // data modal update/create user
   const [dataModalEdit, setDataModalEdit] = useState({});
 
-
-
   useEffect(() => {
     fetchUser();
-
-
   }, [currentPage]);
 
   const fetchUser = async () => {
-
-
     let res = await FetchAllUsers(currentPage, currentLimit);
 
     if (res && res.EC === 0) {
@@ -78,7 +72,7 @@ function Users(props) {
 
   const handleRefresh = async () => {
     await fetchUser();
-  }
+  };
   return (
     <>
       <div className="container">
@@ -88,9 +82,12 @@ function Users(props) {
               <h3>Manage users</h3>
             </div>
             <div className="actions my-3">
-              <button className="btn btn-success mx-3 refresh"
+              <button
+                className="btn btn-success mx-3 refresh"
                 onClick={() => handleRefresh()}
-              ><i className="fa fa-refresh" ></i> Refresh</button>
+              >
+                <i className="fa fa-refresh"></i> Refresh
+              </button>
               <button
                 className="btn btn-primary"
                 onClick={() => {
@@ -165,8 +162,8 @@ function Users(props) {
               <ReactPaginate
                 nextLabel="next >"
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={3}
-                marginPagesDisplayed={2}
+                pageRangeDisplayed={1}
+                marginPagesDisplayed={1}
                 pageCount={totalPages}
                 previousLabel="< previous"
                 pageClassName="page-item"

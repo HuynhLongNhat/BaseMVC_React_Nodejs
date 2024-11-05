@@ -3,8 +3,8 @@ import express from "express";
 import apiController from "../controller/apiController";
 import userController from "../controller/userController";
 import groupController from "../controller/groupController";
-import roleController from "../controller/roleController"
-import { checkUserJWT, checkUserPermission } from "../middleware/JWTActions"
+import roleController from "../controller/roleController";
+import { checkUserJWT, checkUserPermission } from "../middleware/JWTActions";
 const router = express.Router();
 
 /**
@@ -13,14 +13,13 @@ const router = express.Router();
  *
  */
 
-
 const initApiRoutes = (app) => {
-  router.all('*', checkUserJWT, checkUserPermission)
+  router.all("*", checkUserJWT, checkUserPermission);
   router.post("/register", apiController.handleRegister);
   router.post("/login", apiController.handleLogin);
   router.post("/logout", apiController.handleLogout);
 
-  router.get('/account', userController.getUserAccount)
+  router.get("/account", userController.getUserAccount);
   // user routes
   router.get("/user/read", userController.readFunc);
   router.post("/user/create", userController.createFunc);
@@ -33,8 +32,7 @@ const initApiRoutes = (app) => {
   router.put("/role/update", roleController.updateFunc);
   router.delete("/role/delete", roleController.deleteFunc);
   router.get("/role/by-group/:groupId", roleController.getRoleByGroup);
-  router.post('/role/assign-to-group', roleController.assignRoleToGroup)
-
+  router.post("/role/assign-to-group", roleController.assignRoleToGroup);
 
   // groups routes
   router.get("/group/read", groupController.readFunc);

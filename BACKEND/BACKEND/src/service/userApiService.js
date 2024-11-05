@@ -13,13 +13,13 @@ const getAllUser = async () => {
 
     if (users) {
       return {
-        EM: "Get data success",
+        EM: "Lấy dữ liệu thành công",
         EC: 0,
         DT: users,
       };
     } else {
       return {
-        EM: "Get data success",
+        EM: "Lấy dữ liệu không thành công",
         EC: 0,
         DT: [],
       };
@@ -27,7 +27,7 @@ const getAllUser = async () => {
   } catch (error) {
     console.logy("check error", error);
     return {
-      EM: "Something wrong with service",
+      EM: "Lỗi dịch vụ",
       EC: 1,
       DT: [],
     };
@@ -59,7 +59,7 @@ const getUserWithPagination = async (page, limit) => {
   } catch (error) {
     console.log("check error", error);
     return {
-      EM: "Error from server",
+      EM: "Lỗi hệ thống",
       EC: -1,
       DT: "",
     };
@@ -71,7 +71,7 @@ const createNewUser = async (data) => {
     let isEmailExist = await checkEmailExist(data.email);
     if (isEmailExist === true) {
       return {
-        EM: "The email is already exist",
+        EM: "Email này đã tồn tại trong hệ thống",
         EC: -1,
         DT: "email",
       };
@@ -79,7 +79,7 @@ const createNewUser = async (data) => {
     let isPhoneExist = await checkPhoneExist(data.phone);
     if (isPhoneExist === true) {
       return {
-        EM: "The phone is already exist",
+        EM: "Số điện thoại này đã tồn tại trong hệ thống",
         EC: -1,
         DT: "phone",
       };
@@ -99,7 +99,7 @@ const createNewUser = async (data) => {
     });
     if (user) {
       return {
-        EM: " create new user success!",
+        EM: "Tạo người dùng mới thành công",
         EC: 0,
         DT: [],
       };
@@ -107,7 +107,7 @@ const createNewUser = async (data) => {
   } catch (error) {
     console.log("check error :", error);
     return {
-      EM: "Error from server",
+      EM: "Lỗi hệ thống",
       EC: -1,
       DT: "",
     };
@@ -117,11 +117,10 @@ const updateUser = async (data) => {
   try {
     if (!data.groupId) {
       return {
-        EM: 'Error with empty GroupId ',
+        EM: "Lỗi với GroupId trống ",
         EC: 1,
-        DT: "group"
-      }
-
+        DT: "group",
+      };
     }
     let user = await db.User.findOne({
       where: {
@@ -134,28 +133,28 @@ const updateUser = async (data) => {
         username: data.username,
         address: data.address,
         sex: data.sex,
-        groupId: data.groupId
+        groupId: data.groupId,
       });
       return {
-        EM: 'Update user succeeds',
+        EM: "Cập nhật người dùng thành công",
         EC: 0,
-        DT: ""
-      }
+        DT: "",
+      };
     } else {
       //not found
       return {
-        EM: 'User not found! ',
+        EM: "Không tìm thấy người dùng ",
         EC: 2,
-        DT: ""
-      }
+        DT: "",
+      };
     }
   } catch (error) {
     console.log("check error :", error);
     return {
-      EM: 'Something wrongs with services ',
+      EM: "Lỗi dịch vụ ",
       EC: 1,
-      DT: []
-    }
+      DT: [],
+    };
   }
 };
 
@@ -168,13 +167,13 @@ const deleteUser = async (id) => {
     if (user) {
       await user.destroy();
       return {
-        EM: "Delete user success",
+        EM: "Xóa người dùng thành công",
         EC: 0,
         DT: user,
       };
     } else {
       return {
-        EM: "User not exist",
+        EM: "Người dùng không tồn tại",
         EC: 2,
         DT: [],
       };
@@ -182,7 +181,7 @@ const deleteUser = async (id) => {
   } catch (error) {
     console.log("check error : ", error);
     return {
-      EM: "Error from service",
+      EM: "Lỗi dịch vụ",
       EC: -1,
       DT: [],
     };

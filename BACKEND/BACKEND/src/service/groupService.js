@@ -7,7 +7,7 @@ const getGroup = async () => {
     });
     if (groups) {
       return {
-        EM: " Get groups success",
+        EM: "Lấy danh sách các group thành công",
         EC: 0,
         DT: groups,
       };
@@ -15,7 +15,7 @@ const getGroup = async () => {
   } catch (error) {
     console.log("check error", error);
     return {
-      EM: "Error from service",
+      EM: "Lỗi dịch vụ",
       EC: -1,
       DT: [],
     };
